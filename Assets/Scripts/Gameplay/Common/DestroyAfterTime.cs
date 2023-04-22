@@ -10,10 +10,10 @@ namespace Gameplay.Common
 
         private void Start()
         {
-            StartCoroutine(Utils.MakeActionDelay(delegate
+            StartCoroutine(Utils.MakeActionDelay(time, () =>
             {
                 Destroy(gameObject);
-            }, time));
+            }));
         }
     }
 }

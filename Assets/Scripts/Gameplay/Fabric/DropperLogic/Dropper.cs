@@ -1,13 +1,13 @@
 using System.Collections;
+using Gameplay.Fabric.ProductLogic;
 using UnityEngine;
 
-namespace Gameplay.Fabric.Dropper
+namespace Gameplay.Fabric.DropperLogic
 {
     public class Dropper : MonoBehaviour
     {
-        [Header("Spawn properties")]
-        [SerializeField] private float spawnRate = 1f;
-        [SerializeField] private Product productPrefab;
+        [Header("Spawn properties")] 
+        [SerializeField] private DropperDataSO dropperDataSO;
         [SerializeField] private Transform spawnPoint;
 
         private void Start()
@@ -17,14 +17,14 @@ namespace Gameplay.Fabric.Dropper
 
         private void SpawnProduct()
         {
-            Instantiate(productPrefab, spawnPoint.position, productPrefab.transform.rotation);
+            Instantiate(dropperDataSO.ProductPrefab, spawnPoint.position, Quaternion.identity);
         }
 
         private IEnumerator SpawnDelay()
         {
             while (true)
             {
-                yield return new WaitForSeconds(spawnRate);
+                yield return new WaitForSeconds(dropperDataSO.SpawnRate);
                 SpawnProduct();
             }
         }

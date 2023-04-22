@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Gameplay.Fabric.ProductLogic;
 using TMPro;
 using UnityEngine;
 
@@ -20,10 +21,6 @@ namespace Gameplay
         {
             foreach (var product in _productsList)
             {
-                if (product == null)
-                {
-                    continue;
-                }
                 product.Move(transform.forward * conveyorSpeed);
             }
         }
@@ -31,6 +28,11 @@ namespace Gameplay
         private void OnCollisionEnter(Collision other)
         {
             if (other.transform.TryGetComponent<Product>(out var product) == false) return;
+
+            product.OnSell += () =>
+            {
+                _productsList.Remove(product);
+            };
             
             _productsList.Add(product);
         }

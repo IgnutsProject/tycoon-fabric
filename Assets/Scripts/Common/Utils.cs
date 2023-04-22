@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Common
 {
-    public static class Utils
+    public static partial class Utils
     {
-        public static IEnumerator MakeActionDelay(Action action, float time)
+        public static IEnumerator MakeActionDelay(float time, Action action)
         {
             yield return new WaitForSeconds(time);
             action.Invoke();
