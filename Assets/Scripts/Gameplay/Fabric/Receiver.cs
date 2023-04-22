@@ -10,6 +10,8 @@ namespace Gameplay.Fabric
     {
         [SerializeField] private TriggerHandler triggerHandler;
 
+        public event Action<ProductDataSO> OnProductSell;
+
         private void Start()
         {
             triggerHandler.OnEnter += other =>
@@ -18,6 +20,8 @@ namespace Gameplay.Fabric
             
                 StartCoroutine(Utils.MakeActionDelay(GameConfig.ReceiverSellProductTime, () =>
                 {
+                    OnProductSell?.Invoke(product.ProductDataSO);
+                    
                     product.Sell();
                 }));
             };
