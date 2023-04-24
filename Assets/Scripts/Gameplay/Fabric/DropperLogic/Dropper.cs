@@ -6,6 +6,9 @@ namespace Gameplay.Fabric.DropperLogic
 {
     public class Dropper : MonoBehaviour
     {
+        [Header("Audio")] 
+        [SerializeField] private AudioSource audioSource;
+        
         [Header("Spawn properties")] 
         [SerializeField] private DropperDataSO dropperDataSO;
         [SerializeField] private Transform spawnPoint;
@@ -18,6 +21,8 @@ namespace Gameplay.Fabric.DropperLogic
         private void SpawnProduct()
         {
             Instantiate(dropperDataSO.ProductPrefab, spawnPoint.position, Quaternion.identity);
+            
+            if (audioSource) audioSource.Play();
         }
 
         private IEnumerator SpawnDelay()

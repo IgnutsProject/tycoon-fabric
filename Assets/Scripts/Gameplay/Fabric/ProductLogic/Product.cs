@@ -16,6 +16,8 @@ namespace Gameplay.Fabric.ProductLogic
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
+
+            productDataSO = Instantiate(productDataSO);
         }
 
         public void Move(Vector3 direction)

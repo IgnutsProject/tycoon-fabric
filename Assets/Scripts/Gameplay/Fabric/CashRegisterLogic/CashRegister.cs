@@ -15,7 +15,7 @@ namespace Gameplay.Fabric.CashRegisterLogic
         [SerializeField] private TriggerHandler cashOutTrigger;
 
         private int _cashCount;
-
+        
         public int CashCount
         {
             get => _cashCount;
@@ -28,6 +28,7 @@ namespace Gameplay.Fabric.CashRegisterLogic
         }
 
         public event Action<int> OnCashChanged;
+        public event Action OnCashCheckOut;
 
         private void Start()
         {
@@ -43,6 +44,8 @@ namespace Gameplay.Fabric.CashRegisterLogic
                 Wallet.Instance.CashCount += CashCount;
                 
                 CashCount = 0;
+                
+                OnCashCheckOut?.Invoke();
             };
         }
     }

@@ -18,6 +18,12 @@ namespace Gameplay.Fabric.ShopLogic
 
         public int Price => price;
         public string SlotName => slotName;
+        
+        public event UnityAction OnBuy
+        {
+            add => onBuy.AddListener(value);
+            remove => onBuy.RemoveListener(value);
+        }
 
         private void Start()
         {
